@@ -5,7 +5,7 @@ amazon:
   seller-url: https://sell.amazon.de/versand-durch-amazon?ref_=asde_soa_rd&
   # 当前文档日期
   last-date: "221122"
-mail:
+email:
   # 发件设置
   from:
     host: smtp.exmail.com

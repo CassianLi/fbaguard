@@ -13,7 +13,7 @@ amazon:
   seller-url: https://sell.amazon.de/versand-durch-amazon?ref_=asde_soa_rd&
   # 当前文档日期
   last-date: "221122"
-mail:
+email:
   # 发件设置
   from:
     host: smtp.exmail.com
@@ -29,6 +29,8 @@ mail:
     - cc@test.com,CC name
   subject: Amazon FBA Update Notification
   body: <b>Amazon的FBA费用计算文档已于 DOC_DATE 更新</b>，请尽快联系开发人员更新<b>品类费用计算器</b>。详情查看<a href="https://sell.amazon.de/versand-durch-amazon?ref_=asde_soa_rd&">Amazon销售中心</a>。查看文档请<a href="DOC_HREF">点击</a>。
+
+
 ```
 
 部署时请复制`.fbaguard-share.yaml`到命令同一路径下`.fbaguard.yaml` 或通过参数`--config` 指定配置文件路径

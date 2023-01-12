@@ -23,7 +23,7 @@ import (
 
 // sendMail 发送通知邮件
 func sendMail(body string) (err error) {
-	from := viper.GetStringMap("mail.from")
+	from := viper.GetStringMap("email.from")
 	sender := model.MailSender{}
 	err = mapstructure.Decode(from, &sender)
 	if err != nil {
@@ -31,13 +31,13 @@ func sendMail(body string) (err error) {
 	}
 	fmt.Println("sender:", sender)
 
-	to := viper.GetStringSlice("mail.to")
+	to := viper.GetStringSlice("email.to")
 	fmt.Println("to:", to)
 	if len(to) == 0 {
 		return errors.New("至少设置一位收件人")
 	}
 
-	cc := viper.GetStringSlice("mail.cc")
+	cc := viper.GetStringSlice("email.cc")
 	fmt.Println("cc:", cc)
 
 	m := gomail.NewMessage()
@@ -49,7 +49,7 @@ func sendMail(body string) (err error) {
 		m.SetAddressHeader("Cc", c[0], c[1])
 	}
 
-	m.SetHeader("Subject", viper.GetString("mail.subject"))
+	m.SetHeader("Subject", viper.GetString("email.subject"))
 	m.SetBody("text/html", body)
 
 	d := gomail.NewDialer(sender.Host, sender.Port, sender.User, sender.Password)
@@ -63,8 +63,8 @@ func sendMail(body string) (err error) {
 }
 
 func parseAmazonSellerUrl() (href string, err error) {
-	url := viper.GetString("amazon.seller-url")
-	res, err := http.Get(url)
+	uri := viper.GetString("amazon.seller-url")
+	res, err := http.Get(uri)
 	if err != nil {
 		log.Printf("Failed to get Amazon seller center url: %v", err)
 		return "", err
@@ -100,8 +100,9 @@ func parseAmazonSellerUrl() (href string, err error) {
 
 // CheckAmazonFBA Check Amazon FBA document whether to update
 func CheckAmazonFBA() {
-	from := viper.GetStringMap("mail.from")
-	fmt.Println("sender:", from)
+	// debug 信息，稳定后删除
+	fmt.Println(viper.GetString("email.from.host"))
+	fmt.Println(viper.GetString("email.from.user"))
 
 	href, err := parseAmazonSellerUrl()
 	if err != nil {
@@ -118,7 +119,7 @@ func CheckAmazonFBA() {
 	lastDate := viper.GetString("amazon.last-date")
 
 	if docDate != lastDate {
-		body := viper.GetString("mail.body")
+		body := viper.GetString("email.body")
 		body = strings.ReplaceAll(body, "DOC_DATE", time.Now().Format("2006-01-02"))
 
 		body = strings.ReplaceAll(body, "DOC_HREF", href)
