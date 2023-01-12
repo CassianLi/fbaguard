@@ -15,4 +15,4 @@ dist/
 /out/**
 
 # Project exclude paths
-.fbaguard-share.yaml
+.fbaguard.yaml
