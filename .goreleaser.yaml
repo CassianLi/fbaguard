@@ -26,7 +26,6 @@ archives:
         format: zip
     files:
       - .fbaguard-share.yaml
-      - winsw
       - README.md
 checksum:
   name_template: 'checksums.txt'
