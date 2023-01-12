@@ -25,7 +25,7 @@ archives:
       - goos: windows
         format: zip
     files:
-      - .rattler.yaml
+      - .fbaguard-share.yaml
       - winsw
       - README.md
 checksum:
