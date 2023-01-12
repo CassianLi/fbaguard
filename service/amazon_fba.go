@@ -127,6 +127,7 @@ func CheckAmazonFBA() {
 		} else {
 			// 更新最新文档日期
 			viper.Set("amazon.last-date", docDate)
+			fmt.Println("Write config file.....")
 			err = viper.WriteConfig()
 			if err != nil {
 				fmt.Printf("Save config file failed: %v\n", err)
