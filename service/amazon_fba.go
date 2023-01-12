@@ -100,6 +100,9 @@ func parseAmazonSellerUrl() (href string, err error) {
 
 // CheckAmazonFBA Check Amazon FBA document whether to update
 func CheckAmazonFBA() {
+	from := viper.GetStringMap("mail.from")
+	fmt.Println("sender:", from)
+
 	href, err := parseAmazonSellerUrl()
 	if err != nil {
 		log.Println(err)
