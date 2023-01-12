@@ -1,0 +1,18 @@
+./**
+../**
+.git/**
+.idea/**
+.DS_Store
+
+**test**
+**local**
+**dev**
+**.sum
+
+
+
+dist/
+/out/**
+
+# Project exclude paths
+.fbaguard-share.yaml
