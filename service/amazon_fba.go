@@ -100,6 +100,7 @@ func parseAmazonSellerUrl() (href string, err error) {
 
 // CheckAmazonFBA Check Amazon FBA document whether to update
 func CheckAmazonFBA() {
+	viper.GetViper()
 	href, err := parseAmazonSellerUrl()
 	if err != nil {
 		log.Println(err)
@@ -123,13 +124,15 @@ func CheckAmazonFBA() {
 		err := sendMail(body)
 		if err != nil {
 			log.Printf("Send mail failed: %s\n", err)
+		} else {
+			// 更新最新文档日期
+			viper.Set("amazon.last-date", docDate)
+			err = viper.WriteConfig()
+			if err != nil {
+				fmt.Printf("Save config file failed: %v\n", err)
+			}
 		}
-		// 更新最新文档日期
-		viper.Set("amazon.last-date", docDate)
-		err = viper.WriteConfig()
-		if err != nil {
-			fmt.Printf("Save config file failed: %v\n", err)
-		}
+
 	} else {
 		log.Printf("Current document(%s) is valid, dont need to update.\n", lastDate)
 	}
